@@ -1,0 +1,11 @@
+Email: joel.christner@gmail.com
+Password: foo
+SyncRequest: false
+Command: Login
+MessageId: foo
+SenderGuid: bar
+RecipientGuid: baz
+ChannelGuid: holmes
+ContentLength: 13
+
+Hello, World!
