@@ -169,13 +169,13 @@ function msg_tostring(command, sync, recipientGuid, channelGuid, data) {
   var newline = "\r\n";
   if (_email) ret += "Email: " + _email + newline;
   if (_password) ret += "Password: " + _password + newline;
+  if (_guid) ret += "SenderGuid: " + _guid + newline;
   if (command) ret += "Command: " + command + newline;
   if (recipientGuid) ret += "RecipientGuid: " + recipientGuid + newline;
   if (channelGuid) ret += "ChannelGuid: " + channelGuid + newline;
 
   ret += "SyncRequest: " + sync + newline;
-  ret += "MessageId: " + random_guid() + newline;
-  ret += "SenderGuid: " + _guid + newline;
+  ret += "MessageId: " + _email + newline;
 
   var data_len = 0;
   if (data) data_len = data.length;
@@ -352,6 +352,7 @@ function menu() {
   log_force('-------------------------------------------------------------------------------');
   log_force('Available commands:');
   log_force('q, then CTRL-C   exit the application');
+  log_force('login            login to bigq');
   log_force('who              list all connected clients');
   log_force('whoami           show my GUID');
   log_force('/{guid} {msg}    send msg to guid (do not include braces)');
@@ -407,6 +408,10 @@ function process_commands() {
             log_force(_guid);
             break;
 
+          case 'login':
+            login();
+            break;
+
           case 'q':
             run_forever = false;
             break;
@@ -426,6 +431,7 @@ function test() {
   // (email, password, guid, hostname, port, debug)
   init(null, null, null, 'localhost', 8001, true);
   log('test successfully initialized');
+  log('use the \'login\' command once the websocket is connected');
   process_commands();
 }
 
